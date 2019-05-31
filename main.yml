@@ -55,6 +55,7 @@
       - karabiner-elements
       - keybase
       - minikube
+      - osxfuse
       - slack
       - spotify
       - visual-studio-code
@@ -68,7 +69,16 @@
     brew_cask_packages_uninstall:
       - dropbox #  Feel free to change this, it's just an example
 
+    # Taps to be tapped
+    taps:
+      - thoughtbot/formulae
+
   tasks:
+
+  # Tap those taps
+  - homebrew_tap:
+      name: "{{ item }}"
+    loop: "{{ taps }}"
 
   # Install brew packages
   - homebrew:
@@ -101,3 +111,14 @@
   # Cleanup after homebrew
   - name: Cleanup after brewing
     shell: brew cleanup
+
+  # Install npm packages
+  - name: Install packages based on package.json.
+    npm:
+      path: /usr/local/bin
+
+  # Update npm packages
+  - name: Update packages based on package.json to their latest version.
+    npm:
+      path: /usr/local/bin
+      state: latest
