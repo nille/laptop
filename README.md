@@ -1,17 +1,18 @@
 # Laptop
 
-Laptop is a playbook to set up an OS X laptop (for web development).
+This is an ansible playbook to set up a mac workstation to my likings.
 
-It installs and configures most of the software Siyelo uses on our Macs for web and software development. 
+It installs and configures most of the software Nille uses on his mac. 
 
 It can be run multiple times on the same machine safely. It installs, upgrades, or skips packages based on what is already installed on the machine.
 
 
 ## Requirements
 
-We've tested it on;
+I've tested it on;
 
-* OS X Yosemite (~10.10.4)
+* OS X Yosemite
+* macOS Mojave
 
 
 ## Installation
@@ -20,7 +21,7 @@ We've tested it on;
 
 If you'd like to start with my default list of tools and apps (see Included Apps/Config below), then simply install with;
 
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/siyelo/laptop/master/install.sh)"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/nille/laptop2/master/install.sh)"
 
 
 You can always customize the install after-the-fact (see below), and re-run the playbook. It will skip over any installed apps.
@@ -31,12 +32,12 @@ If you want to add/remove to the list of apps/utils installed, its pretty straig
 
 As above, download and bootstrap the script. But stop it before it starts ansible, and edit the playbook as desired, before re-running ansible.
 
-1. Grab and start the bootstrap script. Let it install the prereqs and clone the full `siyelo/laptop` repo locally...
+1. Grab and start the bootstrap script. Let it install the prereqs and clone the full `nille/laptop2` repo locally...
 
-      sh -c "$(curl -fsSL https://raw.githubusercontent.com/siyelo/laptop/master/install.sh)"
+      sh -c "$(curl -fsSL https://raw.githubusercontent.com/nille/laptop2/master/install.sh)"
 
 
-1. Stop the script (Ctrl+C) when ansible asks for the a 'sudo' password. 
+2. Stop the script (Ctrl+C) when ansible asks for the a 'sudo' password. 
 
         ```
         Changing to laptop repo dir ...
@@ -46,15 +47,15 @@ As above, download and bootstrap the script. But stop it before it starts ansibl
 
         ```
 
-1. Change into the cloned repo dir
+3. Change into the cloned repo dir
 
         cd laptop
 
-1. Edit playbook.yml and add/remove the apps/utils you want. 
+4. Edit playbook.yml and add/remove the apps/utils you want. 
 
         vi playbook.yml
 
-1. Kick off ansible manually
+5. Kick off ansible manually
 
         ansible-playbook playbook.yml -i hosts --ask-sudo-pass -vvvv 
 
@@ -283,7 +284,7 @@ The Vagrant box we use is a [clean-ish install of OSX](https://github.com/timsut
 
 ## Author
 
-[Glenn Roberts](http://glenn-roberts.com), 2015. 
+[Nille af Ekenstam](https://nille.dev), 2019.
 
 
 ## Credits
@@ -295,6 +296,7 @@ This project is based off the work of the following folks;
 * [Thoughtbot/laptop](https://github.com/thoughtbot/laptop) (boostrapping, dev tools)
 * [OSX for Hackers](https://gist.github.com/MatthewMueller/e22d9840f9ea2fee4716) (awesome osx tweaks)
 * [Mackup](https://github.com/lra/mackup)  (backup/restore App settings)
+* [sieyelo/laptop](https://github.com/siyelo/laptop) (pretty much all the rest)
 
 *See also*:
 
