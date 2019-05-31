@@ -34,8 +34,6 @@
       - terraform
       - thefuck
       - tldr
-      - vagrant
-      - vagrant-manager
       - wget
       - zsh
       - zsh-autosuggestions
@@ -62,6 +60,8 @@
       - osxfuse
       - slack
       - spotify
+      - vagrant
+      - vagrant-manager
       - virtualbox
       - virtualbox-extension-pack
       - visual-studio-code
