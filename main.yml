@@ -119,9 +119,9 @@
     shell: brew cleanup
 
   # Install npm packages
-- name: Install npm packages
-  npm:
-    name: "{{ item }}"
-    path: /usr/local/bin
-  loop: "{{  npm_packages  }}"
+  - name: Install npm packages
+    npm:
+      name: "{{ item }}"
+      path: /usr/local/bin
+    loop: "{{  npm_packages  }}"
 
