@@ -79,6 +79,14 @@
       - thoughtbot/formulae # rcm
       - caskroom/fonts # font-hack-nerd-fonts
 
+    dotfile_repo_username: nille # the GH repo where your dotfiles are
+    
+    install_oh_my_zsh:  true
+    
+    zsh_path: /usr/local/bin/zsh
+
+    home: "{{ lookup('env','HOME') }}"
+
   tasks:
 
   # Tap those taps
@@ -129,3 +137,28 @@
   - name: Create the locate database
     shell: sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist
 
+    ### ZSH radness 
+
+  - name: Determine if zsh is default/current shell
+    shell: echo $SHELL
+    register: current_shell
+
+  - name: Enable zsh in /etc/shells
+    shell: sudo /bin/sh -c 'grep -q "{{ zsh_path }}" /etc/shells || echo "{{ zsh_path }}" >> /etc/shells'
+    when: current_shell.stdout != '/usr/local/bin/zsh'    
+    #" unbreak my syntax highlighting...
+
+  - name: Set zsh as default shell
+    shell: chsh -s {{ zsh_path }}
+    when: current_shell.stdout != '/usr/local/bin/zsh'
+    sudo: true
+
+  - name: Use GNU tools instead of osx counterparts (grep find etc) 
+    shell: echo 'export PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH' >> ~/.zshrc
+
+
+  - name: Install oh-my-zsh
+    git: repo=https://github.com/robbyrussell/oh-my-zsh dest=~/.oh-my-zsh
+    sudo: false
+    when: install_oh_my_zsh == true
+    tags: install_oh_my_zsh
