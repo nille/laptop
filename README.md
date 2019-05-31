@@ -21,7 +21,7 @@ I've tested it on;
 
 If you'd like to start with my default list of tools and apps (see Included Apps/Config below), then simply install with;
 
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/nille/laptop2/master/install.sh)"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/nille/laptop/master/install.sh)"
 
 
 You can always customize the install after-the-fact (see below), and re-run the playbook. It will skip over any installed apps.
@@ -32,9 +32,9 @@ If you want to add/remove to the list of apps/utils installed, its pretty straig
 
 As above, download and bootstrap the script. But stop it before it starts ansible, and edit the playbook as desired, before re-running ansible.
 
-1. Grab and start the bootstrap script. Let it install the prereqs and clone the full `nille/laptop2` repo locally...
+1. Grab and start the bootstrap script. Let it install the prereqs and clone the full `nille/laptop` repo locally...
 
-      sh -c "$(curl -fsSL https://raw.githubusercontent.com/nille/laptop2/master/install.sh)"
+      sh -c "$(curl -fsSL https://raw.githubusercontent.com/nille/laptop/master/install.sh)"
 
 
 2. Stop the script (Ctrl+C) when ansible asks for the a 'sudo' password. 
