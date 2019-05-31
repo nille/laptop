@@ -157,7 +157,7 @@
   - name: Set zsh as default shell
     shell: chsh -s {{ zsh_path }}
     when: current_shell.stdout != '/bin/zsh'
-    sudo: true
+    sudo: false
 
   - name: Install oh-my-zsh
     git: repo=https://github.com/robbyrussell/oh-my-zsh dest=~/.oh-my-zsh
