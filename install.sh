@@ -60,9 +60,6 @@ fi
 fancy_echo "Installing updates from Apple ..."
 softwareupdate -i -a 
 
-fancy_echo "Installing Brew updates ..."
-brew update
-
 # Clone the repository to your local drive.
 if [ -d "./laptop" ]; then
   fancy_echo "Laptop repo dir exists. Removing ..."
