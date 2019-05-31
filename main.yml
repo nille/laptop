@@ -150,7 +150,7 @@
     register: current_shell
 
   - name: Enable zsh in /etc/shells
-    shell: sudo /bin/sh -c 'grep -q "{{ zsh_path }}" /etc/shells || echo "{{ zsh_path }}" >> /etc/shells'
+    shell: /bin/sh -c 'grep -q "{{ zsh_path }}" /etc/shells || echo "{{ zsh_path }}" >> /etc/shells'
     when: current_shell.stdout != '/usr/local/bin/zsh'    
     #" unbreak my syntax highlighting...
 
@@ -173,4 +173,4 @@
 
   # Create the locate database
   - name: Create the locate database
-    shell: sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist
+    shell: launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist
