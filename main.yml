@@ -80,17 +80,17 @@
       name: "{{ item }}"
     loop: "{{ taps }}"
 
-  # Install brew packages
-  - homebrew:
-      name: "{{ item }}"
-      state: present
-    loop: "{{ brew_packages }}"
-
   # Install brew cask packages
   - homebrew_cask:
       name: "{{ item }}"
       state: present
     loop: "{{ brew_cask_packages }}"
+
+  # Install brew packages
+  - homebrew:
+      name: "{{ item }}"
+      state: present
+    loop: "{{ brew_packages }}"
 
   # Uninstall brew packages
   - homebrew:
