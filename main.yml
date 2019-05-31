@@ -4,16 +4,60 @@
     
     # Brew packages to be installed
     brew_packages:
-      # - keybase # in alpha at time of writing.
+      - ansible
+      - autoconf
+      - automake
+      - awscli
+      - bat
+      - ctop
+      - fluxctl
+      - fzf
+      - gnupg
+      - gnutls
+      - htop
+      - hub
+      - imagemagick
+      - jq
+      - kubernetes-cli
+      - kubernetes-helm
       - node
-      # - npm
+      - npm
+      - ntfs-3g
+      - openssl
+      - pinentry
+      - prettyping
+      - rcm
+      - shpotify
+      - socat
+      - terraform
+      - thefuck
+      - tldr
       - wget
-      # - zsh
-      # - rcm
+      - zsh
+      - zsh-autosuggestions
+      - zsh-history-substring-search
+      - zsh-syntax-highlighting
 
     # Brew cask packages to be installed
     brew_cask_packages:
+      - authy
+      - bitwarden
+      - brave-browser
+      - clipy
+      - cyberduck
       - docker
+      - firefox
+      - font-hack-nerd-fonts
+      - google-chrome
+      - google-cloud-sdk
+      - gpg-suite
+      - iterm2
+      - karabiner-elements
+      - keybase
+      - minikube
+      - slack
+      - spotify
+      - visual-studio-code
       - vlc
 
     # Brew packages to be uninstalled
