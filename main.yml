@@ -72,6 +72,7 @@
     # Taps to be tapped
     taps:
       - thoughtbot/formulae
+      - caskroom/fonts
 
   tasks:
 
