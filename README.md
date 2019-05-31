@@ -68,93 +68,18 @@ You can do this as many times as you like and re-run the `ansible-playbook` comm
 
 Apps installed with Homebrew Cask:
 
-  - 1password
-  - alfred # | http://www.alfredapp.com 
-  - apptrap # remove associated prefs when uninstalling
-  - appzapper # uninstaller
-  - bettertouchtool # window snapping. (maybe Moom is more lightweight?)
-  - carbon-copy-cloner # backups | https://bombich.com/download
-  - cheatsheet # know your shortcuts
-  - cyberduck # ftp, s3, openstack
-  - dash # totally sick API browser
-  - diffmerge # free visual diq
-  - disk-inventory-x # reclaim space on your expensive-ass Apple SSD | http://www.derlien.com/
-  - dropbox # a worse Mega Sync
-  - firefox 
-  - flux # get more sleep
   - google-chrome
-  - imageoptim # optimize images
-  - istumbler # network discovery GUI
-  - jumpcut # awesome clipboard
-  - karabiner # Keyboard customization
-  - licecap # GIFs !
-  - little-snitch # awesome outbound firewall
-  - megasync # a better Dropbox  
-  - monolingual # remove unneeded osx lang files
-  - nvalt # fast note taking
-  - qlcolorcode # quick look syntax highlighting
-  - qlimagesize # quick look image dimensions
-  - qlmarkdown # quick look .md files
-  - qlstephen # quick look extension-less text files
-  - rowanj-gitx # Awesome gitx fork.
-  - sequel-pro # FREE SQL GUI!
-  - shortcat # kill your mouse
-  - shuttle # ssh management
-  - skype # 
-  - sublime-text3 # (experimental cask) | http://www.sublimetext.com/
-  - thunderbird # email
-  - tomighty # pomodoro
-  - torbrowser # be the noise
-  - transmission # torrents
-  - tunnelblick # VPN
-  - vagrant # | https://www.vagrantup.com/downloads.html
-  - vagrant-manager # 
-  - virtualbox # | https://www.virtualbox.org/
-  - vlc 
 
 There are several more common cask apps listed in the playbook.yml - simply uncomment them to include them in your install. 
-
 
 ### Packages/Utilities 
  
 Things installed with Homebrew:
 
-  - autoconf
-  - autojump # quickly navigate from cmd line
-  - bash # Bash 4
-  - boot2docker # for running docker on osx
-  - brew-cask
-  - coreutils # Install GNU core utilities (those that come with OS X are outdated)
-  - cowsay # amazing
-  - docker # | https://docs.docker.com/installation/mac/
-  - findutils  # Install GNU `find`, `locate`, `updatedb`, and `xargs`, g-prefixed
-  - git
-  - go
-  - gpg
-  - hub # github
-  - keybase # in alpha at time of writing.
-  - mtr # better traceroute
-  - node
-  - npm
-  - openssl
-  - packer
-  - postgresql # yes and nosql
-  - python
-  - rbenv # ruby. Just installs binaries - assumes you bring in the dotfiles.
-  - readline
-  - redis
-  - rename # rename multiple files
-  - rsync
-  - ruby-build
-  - sqlite # production rails DB
-  - the_silver_searcher # fast ack-grep
-  - tmux
-  - vim
   - wget
   - zsh
 
 There are several more utils listed in the playbook.yml - simply uncomment them to include them in your install. 
-
 
 ### System Settings
 
@@ -173,7 +98,6 @@ so you need read it very carefully first. (see scripts/system_settings.sh)
 
 TODO: moar sick settings with https://github.com/ryanmaclean/OSX-Post-Install-Script
 
-
 ### User Preferences
 
 It then syncs your user prefs with dotfiles+rcm
@@ -185,8 +109,6 @@ It then grabs [glennr/dotfiles](https://github.com/glennr/dotfiles) repo, saves 
 You probably want to change the `dotfile_repo_username` variable to match your github username :-)
 
 It then runs rcup to initialize your dotfiles.
-
-
 
 ### MacStore Apps (WIP)
 
@@ -200,14 +122,11 @@ TODO: Port bork : https://github.com/mattly/bork/blob/master/types/macstore.sh a
   - Numbers
   - etc
 
-
-
 ### Application Settings (WIP)
 
 Keep your application settings in sync.
 
 TODO: Add Mackup task
-
 
 ### Other 
 
@@ -219,8 +138,6 @@ TODO: Add Mackup task
 - zsh-autosuggestions plugin
 - zsh-history-substring-search plugin
 - zsh-notify plugin
-
-
 
 ## Development
 
@@ -240,30 +157,29 @@ Nada. Well not much. The whole point is to test the process of getting our OSX d
 
 The Vagrant box we use is a [clean-ish install of OSX](https://github.com/timsutton/osx-vm-templates). However the setup notes above uses Packer, which installs Xcode CLI tools. This can't be automated in an actual test run, and needs user intervention to install.
 
-
 ### Test Setup
 
 1. Get [Homebrew Cask](http://caskroom.io/)
     
         brew install caskroom/cask/brew-cask
 
-1. Install [Vagrant](https://www.vagrantup.com/downloads) 
+2. Install [Vagrant](https://www.vagrantup.com/downloads) 
 
         brew cask install --appdir="/Applications" vagrant
 
-1. Install VirtualBox;
+3. Install VirtualBox;
 
         brew cask install --appdir="/Applications" virtualbox
 
-1. cd into this project directory;
+4. cd into this project directory;
 
-1. Run 
+5. Run 
 
         vagrant init http://files.dryga.com/boxes/osx-yosemite-10.10.3.0.box;
 
-1. The Vagrantfile should be ready as soon as Vagrant downloads the box;
+6. The Vagrantfile should be ready as soon as Vagrant downloads the box;
 
-1. Start VM 
+7. Start VM 
 
         vagrant up
 
@@ -303,4 +219,3 @@ This project is based off the work of the following folks;
   - [Battleschool](http://spencer.gibb.us/blog/2014/02/03/introducing-battleschool) is a more general solution than what I've built here. (It may be a better option if you don't want to fork this repo and hack it for your own workstation...).
   - [osxc](https://github.com/osxc) is another more general solution, set up so you can fork the [xc-custom](https://github.com/osxc/xc-custom) repo and get your own local environment bootstrapped quickly.
   - [MWGriffin/ansible-playbooks](https://github.com/MWGriffin/ansible-playbooks) was the original inspiration for this repository, but this project has since been completely rewritten.
-
