@@ -57,7 +57,10 @@
       - keybase
       - minikube
       - osxfuse
+      - plex-media-server
+      - qbittorrent
       - slack
+      - spectacle
       - spotify
       - vagrant
       - vagrant-manager
@@ -157,11 +160,11 @@
   - name: Set zsh as default shell
     shell: chsh -s {{ zsh_path }}
     when: current_shell.stdout != '/bin/zsh'
-    sudo: false
+    become: false
 
   - name: Install oh-my-zsh
     git: repo=https://github.com/robbyrussell/oh-my-zsh dest=~/.oh-my-zsh
-    sudo: false
+    become: false
     when: install_oh_my_zsh == true
     tags: install_oh_my_zsh
 
@@ -207,7 +210,13 @@
           force=yes
 
   - name: Generate dotfiles with rcup
-    shell: env RCRC=~/dotfiles/rcrc rcup
+    shell: env RCRC=$HOME/dotfiles/rcrc rcup
+  
+    ### OSX SETTINGS
+
+  - name: Configure System Settings
+    script: scripts/system_settings.sh
+    become: true
 
     ### House cleaning
 
