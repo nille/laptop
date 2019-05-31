@@ -57,6 +57,12 @@ else
   fancy_echo "Ansible already installed. Skipping."
 fi
 
+fancy_echo "Installing updates from Apple ..."
+softwareupdate -i -a 
+
+fancy_echo "Installing Brew updates ..."
+brew update
+
 # Clone the repository to your local drive.
 if [ -d "./laptop" ]; then
   fancy_echo "Laptop repo dir exists. Removing ..."
@@ -70,4 +76,4 @@ cd laptop
 
 # Run this from the same directory as this README file. 
 fancy_echo "Running ansible playbook ..."
-ansible-playbook playbook.yml -i hosts --ask-sudo-pass -vvvv 
+ansible-playbook playbook.yml -i hosts --become-method sudo --ask-become-pass -vvvv 
