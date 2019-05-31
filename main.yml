@@ -9,7 +9,9 @@
       - automake
       - awscli
       - bat
+      - coreutils
       - ctop
+      - findutils
       - fluxctl
       - fzf
       - gnupg
@@ -32,6 +34,8 @@
       - terraform
       - thefuck
       - tldr
+      - vagrant
+      - vagrant-manager
       - wget
       - zsh
       - zsh-autosuggestions
@@ -58,6 +62,8 @@
       - osxfuse
       - slack
       - spotify
+      - virtualbox
+      - virtualbox-extension-pack
       - visual-studio-code
       - vlc
     
