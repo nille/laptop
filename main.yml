@@ -89,6 +89,8 @@
 
   tasks:
 
+    ### Homebrew 
+
   # Tap those taps
   - homebrew_tap:
       name: "{{ item }}"
@@ -126,16 +128,14 @@
   - name: Cleanup after brewing
     shell: brew cleanup
 
+    ### Node modules
+
   # Install npm packages
   - name: Install npm packages
     npm:
       name: "{{ item }}"
       path: /usr/local/bin
     loop: "{{ npm_packages }}"
-
-  # Create the locate database
-  - name: Create the locate database
-    shell: sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist
 
     ### ZSH radness 
 
@@ -162,3 +162,9 @@
     sudo: false
     when: install_oh_my_zsh == true
     tags: install_oh_my_zsh
+
+    ### House cleaning
+
+  # Create the locate database
+  - name: Create the locate database
+    shell: sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist
