@@ -123,5 +123,9 @@
     npm:
       name: "{{ item }}"
       path: /usr/local/bin
-    loop: "{{  npm_packages  }}"
+    loop: "{{ npm_packages }}"
+
+  # Create the locate database
+  - name: Create the locate database
+    shell: sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist
 
