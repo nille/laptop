@@ -60,6 +60,11 @@
       - spotify
       - visual-studio-code
       - vlc
+    
+    # npm packages to be installed globally
+    npm_packages:
+      - serverless
+      - vtop
 
     # Brew packages to be uninstalled
     brew_packages_uninstall:
@@ -114,12 +119,9 @@
     shell: brew cleanup
 
   # Install npm packages
-  - name: Install packages based on package.json.
-    npm:
-      path: /usr/local/bin
+- name: Install npm packages
+  npm:
+    name: "{{ item }}"
+    path: /usr/local/bin
+  loop: "{{  npm_packages  }}"
 
-  # Update npm packages
-  - name: Update packages based on package.json to their latest version.
-    npm:
-      path: /usr/local/bin
-      state: latest

@@ -1,6 +1,0 @@
-{
-    "dependencies": {
-        "nvm": "0.0.4",
-        "serverless": "^1.44.1"
-    }
-}
