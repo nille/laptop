@@ -41,7 +41,7 @@
 
     # - name: Instal required Homebrew Taps
     #   shell: brew tap {{ item }}
-    #   loop: {{ brew_taps }}
+    #   loop: brew_taps
 
     # - name: Check homebrew-cask is installed
     #   stat: path=/usr/local/bin/brew-cask.rb
@@ -55,7 +55,7 @@
 
     - name: Install libraries/utils with homebrew
       homebrew: name={{ item }} state=present
-      loop: {{ brew_packages }}
+      loop: {{ "brew_packages" }}
     
     - name: Cleanup after brewing
       shell: brew cleanup
@@ -66,12 +66,12 @@
     - name: Check for installed apps(casks)
       shell: brew cask list | grep {{ item }}
       register: installed_brew_cask_packages
-      loop: {{ brew_cask_packages }}
+      loop: brew_cask_packages
       ignore_errors: true
     
     - name: Install Apps with brew-cask
       shell: brew cask install {{ item }}
-      loop: {{ brew_cask_packages }}
+      loop: brew_cask_packages
       when: "{{ item not in installed_brew_cask_packages.results|map(attribute='stdout') }}"
 
     # Caveats: megasync only works if called from /Applications
