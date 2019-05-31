@@ -76,4 +76,4 @@ cd laptop
 
 # Run this from the same directory as this README file. 
 fancy_echo "Running ansible playbook ..."
-ansible-playbook playbook.yml -i hosts --become-method sudo --ask-become-pass -vvvv 
+ansible-playbook main.yml -i hosts --become-method sudo --ask-become-pass -vvvv 

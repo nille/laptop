@@ -1,0 +1,59 @@
+---
+- hosts: all
+  vars:
+    
+    # Brew packages to be installed
+    brew_packages:
+      # - keybase # in alpha at time of writing.
+      - node
+      # - npm
+      - wget
+      # - zsh
+      # - rcm
+
+    # Brew cask packages to be installed
+    brew_cask_packages:
+      - docker
+      - vlc
+
+    # Brew packages to be uninstalled
+    brew_packages_uninstall:
+      - cowsay # Feel free to change this, it's just an example
+
+    # Brew cask packages to be uninstalled
+    brew_cask_packages_uninstall:
+      - dropbox #  Feel free to change this, it's just an example
+
+  tasks:
+
+  # Install brew packages
+  - homebrew:
+      name: "{{ item }}"
+      state: present
+    loop: "{{ brew_packages }}"
+
+  # Install brew cask packages
+  - homebrew_cask:
+      name: "{{ item }}"
+      state: present
+    loop: "{{ brew_cask_packages }}"
+
+  # Uninstall brew packages
+  - homebrew:
+      name: "{{ item }}"
+      state: absent
+    loop: "{{ brew_packages_uninstall }}"
+
+  # Uninstall brew cask packages
+  - homebrew_cask:
+      name: "{{ item }}"
+      state: absent
+    loop: "{{ brew_cask_packages_uninstall }}"
+
+  # Make sure everything brew is up to date
+  - name: Update everything brew
+    shell: brew update && brew upgrade
+
+  # Cleanup after homebrew
+  - name: Cleanup after brewing
+    shell: brew cleanup
