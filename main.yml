@@ -35,7 +35,6 @@
       - thefuck
       - tldr
       - wget
-      - zsh
       - zsh-autosuggestions
       - zsh-history-substring-search
       - zsh-syntax-highlighting
@@ -75,6 +74,7 @@
     # Brew packages to be uninstalled
     brew_packages_uninstall:
       - cowsay # Feel free to change this, it's just an example
+      - zsh
 
     # Brew cask packages to be uninstalled
     brew_cask_packages_uninstall:
@@ -89,7 +89,7 @@
     
     install_oh_my_zsh:  true
     
-    zsh_path: /usr/local/bin/zsh
+    zsh_path: /bin/zsh
 
     home: "{{ lookup('env','HOME') }}"
 
@@ -151,17 +151,13 @@
 
   - name: Enable zsh in /etc/shells
     shell: /bin/sh -c 'grep -q "{{ zsh_path }}" /etc/shells || echo "{{ zsh_path }}" >> /etc/shells'
-    when: current_shell.stdout != '/usr/local/bin/zsh'    
+    when: current_shell.stdout != '/bin/zsh'    
     #" unbreak my syntax highlighting...
 
   - name: Set zsh as default shell
     shell: chsh -s {{ zsh_path }}
-    when: current_shell.stdout != '/usr/local/bin/zsh'
+    when: current_shell.stdout != '/bin/zsh'
     sudo: true
-
-  - name: Use GNU tools instead of osx counterparts (grep find etc) 
-    shell: echo 'export PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH' >> ~/.zshrc
-
 
   - name: Install oh-my-zsh
     git: repo=https://github.com/robbyrussell/oh-my-zsh dest=~/.oh-my-zsh
@@ -169,7 +165,54 @@
     when: install_oh_my_zsh == true
     tags: install_oh_my_zsh
 
+    ### DOTFILES
+
+  - name: Check rcm is installed
+    stat: path=/usr/local/bin/rcup
+    register: rcm_installed
+
+  - name: Install rcm for dotfiles management
+    shell: brew tap thoughtbot/formulae && brew install rcm
+    when: rcm_installed.stat.exists == false
+
+  - name: Check ~/src dir exists
+    stat: path=~/src/
+    register: src_dir_exists
+
+  - name: Assures ~/src dir exists
+    file: path=~/src state=directory
+
+  - name: Assures ~/src/thoughtbot dir exists
+    file: path=~/src/thoughtbot state=directory
+
+  - name: Install thoughtbot/dotfiles
+    git: repo=https://github.com/thoughtbot/dotfiles.git dest=~/src/thoughtbot/dotfiles
+
+  - name: Link ~/dotfiles to ~/src/thoughtbot/dotfiles
+    file: dest=~/dotfiles 
+          src=~/src/thoughtbot/dotfiles
+          state=link
+          force=yes
+    
+  - name: Assures ~/src/{{ dotfile_repo_username }} dir exists
+    file: path=~/src/{{ dotfile_repo_username }} state=directory
+
+  - name: Install {{ dotfile_repo_username }}/dotfiles
+    git: repo=https://github.com/{{ dotfile_repo_username }}/dotfiles.git dest=~/src/{{ dotfile_repo_username }}/dotfiles
+
+  - name: Link ~/dotfiles-local to ~/src/{{ dotfile_repo_username }}/dotfiles
+    file: dest=~/dotfiles-local
+          src=~/src/{{ dotfile_repo_username }}/dotfiles
+          state=link
+          force=yes
+
+  - name: Generate dotfiles with rcup
+    shell: env RCRC=~/dotfiles/rcrc rcup
+
     ### House cleaning
+
+  - name: Use GNU tools instead of osx counterparts (grep find etc) 
+    shell: echo 'export PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH' >> ~/.zshrc
 
   # Create the locate database
   - name: Create the locate database
