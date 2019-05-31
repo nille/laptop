@@ -71,8 +71,8 @@
 
     # Taps to be tapped
     taps:
-      - thoughtbot/formulae
-      - caskroom/fonts
+      - thoughtbot/formulae # rcm
+      - caskroom/fonts # font-hack-nerd-fonts
 
   tasks:
 
